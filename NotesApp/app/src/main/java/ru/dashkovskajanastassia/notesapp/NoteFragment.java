@@ -59,10 +59,6 @@ public class NoteFragment extends Fragment {
             // ОШИБКА
             text.setText(note.getNoteTitle());
 
-            Button buttonBack = view.findViewById(R.id.buttonback);
-            buttonBack.setOnClickListener(v -> {
-                requireActivity().getSupportFragmentManager().popBackStack();
-            });
             text.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -80,6 +76,15 @@ public class NoteFragment extends Fragment {
             });
             TextView tv = view.findViewById(R.id.Description);
         tv.setText(note.getNoteContent());
+
+        Button buttonBack = view.findViewById(R.id.buttonback);
+        if(buttonBack != null){
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });}
 
         }
     }
