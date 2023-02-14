@@ -32,7 +32,7 @@ public class NotesFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-
+       // outState.putInt(NOTE, currentPosition);
         outState.putParcelable(SELECTED_NOTE, note);
             super.onSaveInstanceState(outState);
     }
@@ -47,7 +47,7 @@ public class NotesFragment extends Fragment {
                 savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             if(savedInstanceState != null){
-
+                //currentPosition = savedInstanceState.getInt(NOTE, 0);
                note = (Note)savedInstanceState.getParcelable(SELECTED_NOTE);
             }
             initListNotes(view);
@@ -55,11 +55,11 @@ public class NotesFragment extends Fragment {
                 ShowTextLand(note);
             }
         }
-
+        // создаём список городов на экране из массива в ресурсах
         @RequiresApi(api = Build.VERSION_CODES.O)
         private void initListNotes(View view) {
             LinearLayout layoutView = (LinearLayout) view;
-
+           // String[] notes = getResources().getStringArray(R.array.notes);
 
             for (int i = 0; i < Note.getNotes().length; i++) {
                 TextView tv = new TextView(getContext());

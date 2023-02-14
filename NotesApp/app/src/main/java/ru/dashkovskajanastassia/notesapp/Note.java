@@ -113,6 +113,7 @@ public class Note implements Parcelable {
         id = parcel.readInt();
         noteTitle = parcel.readString();
         noteContent = parcel.readString();
+
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {

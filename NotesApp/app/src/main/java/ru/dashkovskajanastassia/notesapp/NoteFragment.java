@@ -43,7 +43,7 @@ public class NoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_note, container, false);
     }
 
@@ -52,13 +52,19 @@ public class NoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle arguments = getArguments();
+
+
         if(arguments != null){
-
-            note = (Note) arguments.getParcelable(SELECTED_NOTE);
+           // int index = arguments.getInt(ARG_INDEX);
+            note = arguments.getParcelable(SELECTED_NOTE);
             TextView text = view.findViewById(R.id.name);
-            // ОШИБКА
             text.setText(note.getNoteTitle());
-
+           // TypedArray texts = getResources().obtainTypedArray(R.array.notesList);
+            //text.setText(Note.getNotes()[index].getNoteTitle());
+            Button buttonBack = view.findViewById(R.id.buttonback);
+            buttonBack.setOnClickListener(v -> {
+                requireActivity().getSupportFragmentManager().popBackStack();
+            });
             text.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -67,6 +73,7 @@ public class NoteFragment extends Fragment {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
               note.setNoteTitle(s.toString());
+                    //      Note.getNotes()[index].setNoteTitle(s.toString());
                 }
 
                 @Override
@@ -76,15 +83,7 @@ public class NoteFragment extends Fragment {
             });
             TextView tv = view.findViewById(R.id.Description);
         tv.setText(note.getNoteContent());
-
-        Button buttonBack = view.findViewById(R.id.buttonback);
-        if(buttonBack != null){
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().getSupportFragmentManager().popBackStack();
-            }
-        });}
+            //    tv.setText(Note.getNotes()[index].getNoteContent());
 
         }
     }
